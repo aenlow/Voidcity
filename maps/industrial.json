@@ -1,0 +1,63 @@
+{
+  "id": "industrial",
+  "name": "Ferrous Flats",
+  "subtitle": "Industrial district",
+  "blurb": "Nothing small to eat. Survive the opening and the payout is huge.",
+  "width": 5800,
+  "height": 5800,
+  "ambient": "industrial",
+  "startRadius": 22,
+  "growthRate": 1.2,
+  "pacing": "Slow start · enormous endgame",
+  "blockMin": 420,
+  "blockMax": 640,
+  "roadWidth": 52,
+  "avenueWidth": 88,
+  "avenueEvery": 3,
+  "districtWeights": [
+    [
+      "industrial",
+      7
+    ],
+    [
+      "mixed",
+      2
+    ],
+    [
+      "commercial",
+      1.5
+    ],
+    [
+      "residential",
+      1
+    ],
+    [
+      "park",
+      0.6
+    ],
+    [
+      "downtown",
+      0.6
+    ]
+  ],
+  "vehicleDensity": 0.8,
+  "propDensity": 0.8,
+  "landmarks": 6,
+  "landmarkTypes": [
+    "powerplant",
+    "factory",
+    "railyard",
+    "warehouse",
+    "watertower"
+  ],
+  "palette": {
+    "ground": "#1a1613",
+    "block": "#201b17",
+    "road": "#2d2722",
+    "roadLine": "#4b4136",
+    "grass": "#2f3324",
+    "sidewalk": "#332c25",
+    "accent": "#ff9b4a",
+    "sky": "#0f0c0a"
+  }
+}
