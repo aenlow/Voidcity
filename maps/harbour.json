@@ -1,0 +1,64 @@
+{
+  "id": "harbour",
+  "name": "Tidewater Quay",
+  "subtitle": "Harbour",
+  "blurb": "Long piers, container stacks and cranes. Score is stacked, literally.",
+  "width": 5000,
+  "height": 4200,
+  "ambient": "dusk",
+  "startRadius": 20,
+  "growthRate": 1.08,
+  "pacing": "Stack-heavy · long runs between piers",
+  "blockMin": 300,
+  "blockMax": 560,
+  "roadWidth": 44,
+  "avenueWidth": 82,
+  "avenueEvery": 5,
+  "districtWeights": [
+    [
+      "depot",
+      6
+    ],
+    [
+      "industrial",
+      4
+    ],
+    [
+      "plaza",
+      2.5
+    ],
+    [
+      "commercial",
+      1.5
+    ],
+    [
+      "mixed",
+      1.2
+    ],
+    [
+      "park",
+      0.6
+    ]
+  ],
+  "spacing": 1.2,
+  "vehicleDensity": 0.9,
+  "propDensity": 1.5,
+  "landmarks": 6,
+  "landmarkTypes": [
+    "warehouse",
+    "powerplant",
+    "railyard",
+    "factory",
+    "stadium"
+  ],
+  "palette": {
+    "ground": "#10181f",
+    "block": "#16202a",
+    "road": "#212a33",
+    "roadLine": "#3a4856",
+    "grass": "#1c3330",
+    "sidewalk": "#28323c",
+    "accent": "#4fc3e8",
+    "sky": "#08111a"
+  }
+}

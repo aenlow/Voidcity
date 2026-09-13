@@ -1,0 +1,68 @@
+{
+  "id": "suburbs",
+  "name": "Sable Heights",
+  "subtitle": "Suburbs",
+  "blurb": "Wide roads, big yards, easy early food. Slow finish.",
+  "width": 5200,
+  "height": 5200,
+  "ambient": "dusk",
+  "startRadius": 20,
+  "growthRate": 1,
+  "pacing": "Gentle start · low density",
+  "blockMin": 340,
+  "blockMax": 520,
+  "roadWidth": 46,
+  "avenueWidth": 76,
+  "avenueEvery": 4,
+  "districtWeights": [
+    [
+      "residential",
+      6
+    ],
+    [
+      "park",
+      3
+    ],
+    [
+      "commercial",
+      2
+    ],
+    [
+      "mixed",
+      2
+    ],
+    [
+      "downtown",
+      0.4
+    ],
+    [
+      "industrial",
+      0.3
+    ],
+    [
+      "plaza",
+      1.4
+    ]
+  ],
+  "spacing": 1.25,
+  "vehicleDensity": 0.55,
+  "propDensity": 1,
+  "landmarks": 5,
+  "landmarkTypes": [
+    "school",
+    "mall",
+    "watertower",
+    "stadium",
+    "monument"
+  ],
+  "palette": {
+    "ground": "#151d1a",
+    "block": "#1a231f",
+    "road": "#242c31",
+    "roadLine": "#3d4a4b",
+    "grass": "#20392a",
+    "sidewalk": "#2b352f",
+    "accent": "#67d6a0",
+    "sky": "#0b1210"
+  }
+}

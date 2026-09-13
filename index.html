@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
+<title>Void City</title>
+<meta name="description" content="A hole eats a city. Offline arcade game, installs to your home screen.">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#07070c">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Void City">
+<link rel="icon" href="assets/icons/favicon.png" sizes="any">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<!-- iOS launch image (splash). Safari falls back to the background colour. -->
+<link rel="apple-touch-startup-image" href="assets/icons/splash-1290x2796.png">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ==================================================================== -->
+<!-- MAIN MENU                                                            -->
+<!-- ==================================================================== -->
+<section class="screen is-active" id="screen-menu">
+  <header class="menu-head">
+    <div class="coins" id="menu-coins" title="Coins">0</div>
+    <button class="icon-btn" data-goto="settings" aria-label="Settings">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.5-2-3.4-2.4 1a7.7 7.7 0 0 0-1.7-1L14.9 3h-3.8l-.4 2.6c-.6.2-1.2.6-1.7 1l-2.4-1-2 3.4L6.6 11a7.6 7.6 0 0 0 0 2l-2 1.5 2 3.4 2.4-1c.5.4 1.1.8 1.7 1l.4 2.6h3.8l.4-2.6c.6-.2 1.2-.6 1.7-1l2.4 1 2-3.4-2-1.5Z"/></svg>
+    </button>
+  </header>
+
+  <div class="hero">
+    <div class="hero-hole" aria-hidden="true"><span></span></div>
+    <h1 class="wordmark">Void<br>City</h1>
+    <p class="tagline">Fall through the street. Take the block with you.</p>
+  </div>
+
+  <nav class="menu-actions">
+    <button class="play-btn" id="btn-campaign">
+      <span class="play-label" id="campaign-label">Campaign</span>
+      <span class="play-meta" id="campaign-meta">Chapter I · Sinkhole</span>
+    </button>
+
+    <div class="quick-row">
+      <button class="quick-btn" id="btn-play">
+        <span class="quick-title">Freeplay</span>
+        <span class="quick-sub" id="play-meta">Sable Heights · Classic</span>
+      </button>
+      <button class="quick-btn" id="btn-ladder">
+        <span class="quick-title">Ladder</span>
+        <span class="quick-sub" id="ladder-meta">Finish the campaign</span>
+      </button>
+    </div>
+
+    <div class="stat-strip">
+      <div><b id="strip-stars">0</b><span>stars</span></div>
+      <div><b id="strip-cleared">0</b><span>stages</span></div>
+      <div><b id="strip-best">0</b><span>best run</span></div>
+      <div><b id="strip-ach">0</b><span>awards</span></div>
+    </div>
+  </nav>
+
+  <footer class="menu-foot">
+    <button class="link-btn" id="btn-install" hidden>Install Void City</button>
+    <span class="version">v1.0 · plays offline</span>
+  </footer>
+</section>
+
+<!-- ==================================================================== -->
+<!-- MAPS / MODE / SEED                                                   -->
+<!-- ==================================================================== -->
+<section class="screen" id="screen-maps">
+  <header class="bar">
+    <button class="icon-btn" data-back aria-label="Back">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+    </button>
+    <h2>Choose a city</h2>
+  </header>
+
+  <div class="scroll">
+    <div class="map-list" id="map-list"><!-- built by ui.js --></div>
+
+    <h3 class="section-title">Mode</h3>
+    <div class="chip-row" id="mode-row"><!-- built by ui.js --></div>
+    <p class="hint" id="mode-blurb"></p>
+
+    <h3 class="section-title">Seed</h3>
+    <p class="hint">Same seed, same city — every time, on every device.</p>
+    <div class="seed-row">
+      <input id="seed-input" class="text-input" maxlength="24" placeholder="Leave empty for a fresh city" autocomplete="off" spellcheck="false">
+      <button class="ghost-btn" id="btn-seed-random" title="Random seed">Shuffle</button>
+    </div>
+    <div class="btn-row">
+      <button class="ghost-btn" id="btn-seed-copy">Copy</button>
+      <button class="ghost-btn" id="btn-seed-save">Save</button>
+      <button class="ghost-btn" id="btn-seed-share">Share</button>
+    </div>
+    <div class="saved-seeds" id="saved-seeds"></div>
+
+    <h3 class="section-title">Custom maps</h3>
+    <p class="hint">Load a city from a JSON file, or export the one you last played.</p>
+    <div class="btn-row">
+      <button class="ghost-btn" id="btn-map-import">Import JSON</button>
+      <button class="ghost-btn" id="btn-map-sample">Sample map</button>
+      <button class="ghost-btn" id="btn-map-export">Export last city</button>
+    </div>
+    <input type="file" id="map-file" accept="application/json,.json" hidden>
+    <div class="notice" id="map-notice" hidden></div>
+  </div>
+
+  <div class="screen-foot">
+    <button class="play-btn" id="btn-play-2"><span class="play-label">Play</span><span class="play-meta" id="play-meta-2"></span></button>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- CHALLENGES                                                           -->
+<!-- ==================================================================== -->
+<section class="screen" id="screen-more">
+  <header class="screen-head">
+    <h2>More</h2>
+    <span class="coins" id="more-coins">0</span>
+  </header>
+  <div class="scroll">
+    <button class="row-btn" data-goto="maps">
+      <span class="row-title">Freeplay cities</span>
+      <span class="row-sub" id="row-maps-sub">Pick a map, mode and seed</span>
+    </button>
+    <button class="row-btn" data-goto="challenges">
+      <span class="row-title">Challenges<i class="badge" id="challenge-badge-2" hidden>0</i></span>
+      <span class="row-sub" id="row-challenge-sub">Daily and weekly goals</span>
+    </button>
+    <button class="row-btn" data-goto="stats">
+      <span class="row-title">Records</span>
+      <span class="row-sub" id="row-stats-sub">Stats, high scores, achievements</span>
+    </button>
+    <button class="row-btn" data-goto="settings">
+      <span class="row-title">Settings</span>
+      <span class="row-sub">Audio, difficulty, controls, data</span>
+    </button>
+    <p class="hint" id="more-version">Void City · plays offline</p>
+  </div>
+</section>
+
+<section class="screen" id="screen-campaign">
+  <header class="screen-head">
+    <h2>Stages</h2>
+    <span class="star-count" id="campaign-stars">0 ★</span>
+  </header>
+  <div class="chapter-strip" id="chapter-tabs"></div>
+  <div class="scroll map-scroll" id="map-scroll">
+    <p class="chapter-note" id="chapter-note"></p>
+    <div class="level-map" id="stage-list"></div>
+    <button class="ghost-btn wide" id="btn-ladder-more" hidden>Load more rungs</button>
+  </div>
+</section>
+
+<section class="screen" id="screen-challenges">
+  <header class="bar">
+    <button class="icon-btn" data-back aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+    <h2>Challenges</h2>
+    <div class="coins" id="challenge-coins">0</div>
+  </header>
+  <div class="scroll">
+    <h3 class="section-title">Today <span class="timer-note" id="daily-reset"></span></h3>
+    <div id="daily-list" class="challenge-list"></div>
+    <h3 class="section-title">This week</h3>
+    <div id="weekly-list" class="challenge-list"></div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- COSMETICS                                                            -->
+<!-- ==================================================================== -->
+<section class="screen" id="screen-cosmetics">
+  <header class="bar">
+    <button class="icon-btn" data-back aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+    <h2>Void shop</h2>
+    <div class="coins" id="shop-coins">0</div>
+  </header>
+  <div class="chip-row" id="shop-tabs">
+    <button class="chip is-on" data-kind="skin">Skins</button>
+    <button class="chip" data-kind="trail">Trails</button>
+    <button class="chip" data-kind="theme">Themes</button>
+  </div>
+  <div class="scroll">
+    <div class="shop-grid" id="shop-grid"></div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- STATS + ACHIEVEMENTS                                                 -->
+<!-- ==================================================================== -->
+<section class="screen" id="screen-stats">
+  <header class="bar">
+    <button class="icon-btn" data-back aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+    <h2>Records</h2>
+  </header>
+  <div class="scroll">
+    <div class="stat-grid" id="stat-grid"></div>
+    <h3 class="section-title">High scores</h3>
+    <div class="chip-row" id="score-tabs"></div>
+    <table class="score-table"><tbody id="score-body"></tbody></table>
+    <h3 class="section-title">Achievements <span class="timer-note" id="ach-progress"></span></h3>
+    <div id="achievement-list" class="achievement-list"></div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- SETTINGS                                                             -->
+<!-- ==================================================================== -->
+<section class="screen" id="screen-settings">
+  <header class="bar">
+    <button class="icon-btn" data-back aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+    <h2>Settings</h2>
+  </header>
+  <div class="scroll">
+    <div class="setting">
+      <label for="set-difficulty">Rival difficulty</label>
+      <select id="set-difficulty" class="text-input">
+        <option value="relaxed">Relaxed</option>
+        <option value="normal">Normal</option>
+        <option value="hard">Hard</option>
+        <option value="brutal">Brutal</option>
+      </select>
+    </div>
+    <p class="hint">Rivals play the same game you do — difficulty changes how fast they grow and move, not how smart they are. Campaign stages set their own.</p>
+    <div class="setting">
+      <label for="set-sfx">Sound effects</label>
+      <input type="range" id="set-sfx" min="0" max="1" step="0.05">
+    </div>
+    <div class="setting">
+      <label for="set-music">City ambience</label>
+      <input type="range" id="set-music" min="0" max="1" step="0.05">
+    </div>
+    <div class="setting"><label for="set-mute">Mute everything</label><input type="checkbox" id="set-mute" class="switch"></div>
+    <div class="setting"><label for="set-shake">Screen shake</label><input type="checkbox" id="set-shake" class="switch"></div>
+    <div class="setting">
+      <label for="set-particles">Particles</label>
+      <select id="set-particles" class="text-input">
+        <option value="high">High</option>
+        <option value="low">Low</option>
+        <option value="off">Off</option>
+      </select>
+    </div>
+    <div class="setting"><label for="set-fps">Show frame rate</label><input type="checkbox" id="set-fps" class="switch"></div>
+
+    <h3 class="section-title">Controls</h3>
+    <p class="hint">Desktop: <b>WASD</b> or the arrow keys; hold the mouse button to steer toward the cursor. <b>Esc</b> pauses.<br>
+       Mobile: touch anywhere on the city and drag — the joystick appears under your thumb.</p>
+
+    <h3 class="section-title">Data</h3>
+    <p class="hint">Everything is stored on this device only. There is no account and nothing is uploaded.</p>
+    <div class="btn-row">
+      <button class="ghost-btn" id="btn-export-save">Export save</button>
+      <button class="ghost-btn danger" id="btn-reset">Erase everything</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================================== -->
+<!-- GAME                                                                 -->
+<!-- ==================================================================== -->
+<section class="screen screen-game" id="screen-game">
+  <canvas id="game-canvas"></canvas>
+
+  <div class="hud" id="hud">
+    <!-- Top row: score on the left, clock in the middle, pause on the right.
+         Everything is sized for a thumb and reads at arm's length. -->
+    <div class="hud-top">
+      <div class="hud-left">
+        <div class="score" id="hud-score">0</div>
+        <div class="level-row">
+          <span class="level-tag" id="hud-level">Lv 1</span>
+          <span class="combo" id="hud-combo" hidden>x1.0</span>
+        </div>
+      </div>
+
+      <div class="hud-mid">
+        <div class="timer" id="hud-timer">2:00</div>
+        <div class="destruction" id="hud-destruction">0%</div>
+      </div>
+
+      <button class="hud-btn no-joystick" id="btn-pause" aria-label="Pause">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/></svg>
+      </button>
+    </div>
+
+    <!-- Size bar: the hole.io read at a glance — how big you are, what level,
+         and how close the next one is. -->
+    <div class="size-bar">
+      <span class="size-value" id="hud-size">20</span>
+      <span class="size-track"><i id="hud-level-fill"></i></span>
+      <span class="size-next" id="hud-next">Lv 2</span>
+    </div>
+
+    <div class="board" id="hud-board" hidden></div>
+    <div class="objective" id="hud-objective" hidden>
+      <span class="objective-label" id="objective-label"></span>
+      <span class="objective-value" id="objective-value"></span>
+      <span class="objective-bar"><i id="objective-fill"></i></span>
+    </div>
+    <div class="fps" id="hud-fps" hidden></div>
+    <div class="toasts" id="toasts"></div>
+
+    <!-- Big centred callouts for level ups and milestones. -->
+    <div class="popup" id="hud-popup" hidden><span id="popup-text"></span></div>
+  </div>
+
+  <div class="joystick" id="joystick"><div class="stick-base"></div><div class="stick-knob"></div></div>
+
+  <!-- Godzilla mode cinematic -->
+  <div class="godzilla" id="godzilla-banner" hidden>
+    <div class="godzilla-inner">
+      <span class="godzilla-sub">80% of the city is gone</span>
+      <span class="godzilla-title">Godzilla mode</span>
+      <span class="godzilla-note">Double score · wider pull · nothing survives</span>
+    </div>
+  </div>
+
+  <!-- Pause -->
+  <div class="overlay" id="pause-overlay" hidden>
+    <div class="panel">
+      <h2>Paused</h2>
+      <p class="hint" id="pause-meta"></p>
+      <button class="play-btn" id="btn-resume"><span class="play-label">Resume</span></button>
+      <div class="btn-row">
+        <button class="ghost-btn" id="btn-restart">Restart</button>
+        <button class="ghost-btn" id="btn-quit">Quit to menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="overlay" id="result-overlay" hidden>
+    <div class="panel result-panel">
+      <div class="result-stars" id="result-stars" hidden><i></i><i></i><i></i></div>
+      <span class="result-kicker" id="result-kicker">City consumed</span>
+      <div class="result-score" id="result-score">0</div>
+      <div class="result-grid" id="result-grid"></div>
+      <div id="result-board" class="result-board"></div>
+      <div id="result-unlocks" class="result-unlocks"></div>
+      <button class="play-btn" id="btn-again"><span class="play-label">Play again</span><span class="play-meta" id="again-meta"></span></button>
+      <div class="btn-row">
+        <button class="ghost-btn" id="btn-result-seed">Copy seed</button>
+        <button class="ghost-btn" id="btn-result-menu">Menu</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="tabbar" id="tabbar">
+  <button class="tab is-on" data-tab="menu">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/></svg>
+    <span>Play</span>
+  </button>
+  <button class="tab" data-tab="campaign">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.3l6.1-.7L12 3z"/></svg>
+    <span>Stages</span><i class="tab-badge" id="tab-star-badge" hidden>0</i>
+  </button>
+  <button class="tab" data-tab="cosmetics">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9l8-4.5L20 9v6l-8 4.5L4 15V9z"/></svg>
+    <span>Shop</span>
+  </button>
+  <button class="tab" data-tab="more">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>
+    <span>More</span><i class="tab-badge" id="tab-more-badge" hidden>0</i>
+  </button>
+</nav>
+
+<div class="global-toast" id="global-toast" hidden></div>
+
+<script type="module" src="game.js"></script>
+</body>
+</html>

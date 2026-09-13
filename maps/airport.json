@@ -1,0 +1,64 @@
+{
+  "id": "airport",
+  "name": "Cassini Field",
+  "subtitle": "Airport",
+  "blurb": "Enormous open aprons between dense terminals. All about routing.",
+  "width": 5200,
+  "height": 4600,
+  "ambient": "midnight",
+  "startRadius": 22,
+  "growthRate": 1.5,
+  "pacing": "Wide open · long sprints",
+  "blockMin": 420,
+  "blockMax": 760,
+  "roadWidth": 52,
+  "avenueWidth": 104,
+  "avenueEvery": 6,
+  "districtWeights": [
+    [
+      "plaza",
+      6
+    ],
+    [
+      "depot",
+      3
+    ],
+    [
+      "commercial",
+      2.5
+    ],
+    [
+      "industrial",
+      2
+    ],
+    [
+      "mixed",
+      1.5
+    ],
+    [
+      "downtown",
+      0.8
+    ]
+  ],
+  "spacing": 1.45,
+  "vehicleDensity": 1,
+  "propDensity": 1.7,
+  "landmarks": 8,
+  "landmarkTypes": [
+    "mall",
+    "warehouse",
+    "stadium",
+    "cityblock",
+    "railyard"
+  ],
+  "palette": {
+    "ground": "#12131b",
+    "block": "#191b24",
+    "road": "#23252f",
+    "roadLine": "#4a4d5e",
+    "grass": "#1f2f22",
+    "sidewalk": "#2a2d38",
+    "accent": "#ffd166",
+    "sky": "#0a0b12"
+  }
+}

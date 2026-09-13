@@ -1,0 +1,63 @@
+{
+  "id": "oldtown",
+  "name": "Ashgrove",
+  "subtitle": "Old town",
+  "blurb": "Tiny blocks, narrow lanes, packed tight. Claustrophobic and fast.",
+  "width": 3600,
+  "height": 3600,
+  "ambient": "dusk",
+  "startRadius": 18,
+  "growthRate": 0.88,
+  "pacing": "Very dense · tight corners",
+  "blockMin": 150,
+  "blockMax": 250,
+  "roadWidth": 30,
+  "avenueWidth": 52,
+  "avenueEvery": 4,
+  "districtWeights": [
+    [
+      "mixed",
+      5
+    ],
+    [
+      "residential",
+      4
+    ],
+    [
+      "commercial",
+      3
+    ],
+    [
+      "plaza",
+      2
+    ],
+    [
+      "park",
+      1.5
+    ],
+    [
+      "downtown",
+      0.6
+    ]
+  ],
+  "spacing": 0.8,
+  "vehicleDensity": 0.85,
+  "propDensity": 1.35,
+  "landmarks": 4,
+  "landmarkTypes": [
+    "school",
+    "monument",
+    "watertower",
+    "mall"
+  ],
+  "palette": {
+    "ground": "#1a1512",
+    "block": "#221b16",
+    "road": "#2b241f",
+    "roadLine": "#4a3f35",
+    "grass": "#2a3320",
+    "sidewalk": "#332a23",
+    "accent": "#ffa06a",
+    "sky": "#120d0a"
+  }
+}
